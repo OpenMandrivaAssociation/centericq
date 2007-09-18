@@ -1,6 +1,6 @@
 %define name centericq
 %define version 4.21.0
-%define release %mkrel 3
+%define release %mkrel 4
 
 Version:	%{version}
 Summary:	Console ncurses based ICQ2000, Yahoo!, MSN, AIM, IRC client
