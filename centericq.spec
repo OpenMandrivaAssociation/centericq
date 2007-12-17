@@ -17,7 +17,6 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	glib-devel
 BuildRequires:	curl-devel
 BuildRequires:	jpeg-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 centericq is a text mode menu- and window-driven IM interface. Currently
