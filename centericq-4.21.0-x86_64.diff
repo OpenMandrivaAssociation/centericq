@@ -1,0 +1,142 @@
+Index: src/icqdialogs.cc
+===================================================================
+--- src/icqdialogs.cc
++++ src/icqdialogs.cc	2007-03-21 22:35:36.000000000 +0100
+@@ -894,7 +894,7 @@
+     i = m.open();
+     m.close();
+ 
+-    if(i) f = (unsigned short) ((int) m.getref(i-1));
++    if(i) f = (unsigned short) ((size_t) m.getref(i-1));
+ }
+ 
+ void icqface::selectlanguage(unsigned short &f) {
+@@ -946,7 +946,7 @@
+     int i = m.open();
+     m.close();
+ 
+-    if(i) f = (imgender) ((int) m.getref(i-1));
++    if(i) f = (imgender) ((size_t) m.getref(i-1));
+ }
+ 
+ void icqface::selectagerange(ICQ2000::AgeRange &r) {
+@@ -967,7 +967,7 @@
+     int i = m.open();
+     m.close();
+ 
+-    if(i) r = (ICQ2000::AgeRange) ((int) m.getref(i-1));
++    if(i) r = (ICQ2000::AgeRange) ((size_t) m.getref(i-1));
+ }
+ 
+ bool icqface::edit(string &txt, const string &header) {
+@@ -1256,7 +1256,7 @@
+ 
+ 	void *p;
+ 	finished = !db.open(n, b, &p);
+-	i = (int) p;
++	i = (size_t) p;
+ 
+ 	if(!finished)
+ 	switch(b) {
+@@ -1750,7 +1750,7 @@
+ 	    it = transfers.end();
+ 
+ 	    if(!db.gettree()->isnode(db.gettree()->getid(np-1)))
+-		it = transfers.begin() + (int) db.getmenu()->getref(n-1);
++		it = transfers.begin() + (size_t) db.getmenu()->getref(n-1);
+ 
+ 	    switch(b) {
+ 		case 0:
+Index: src/icqface.cc
+===================================================================
+--- src/icqface.cc
++++ src/icqface.cc	2007-03-21 22:40:25.000000000 +0100
+@@ -401,7 +401,7 @@
+ 
+     m.scale();
+     m.idle = &menuidle;
+-    i = (int) m.getref(m.open()-1);
++    i = (size_t) m.getref(m.open()-1);
+     m.close();
+ 
+     if(i) lastr = i;
+@@ -450,7 +450,7 @@
+ 
+     if(i) {
+ 	lastitem = i-1;
+-	r = (int) m.getref(lastitem);
++	r = (size_t) m.getref(lastitem);
+     }
+ 
+     return r;
+@@ -513,7 +513,7 @@
+ 	    g = 0;
+ 	}
+ 	
+-	if((unsigned int) c < 100) c = 0;
++	if((unsigned long) c < 100) c = 0;
+ 
+ 	if(i) {
+ 	    switch(action = extk) {
+@@ -1484,7 +1484,7 @@
+ 	m.scale();
+ 
+ 	i = m.open();
+-	choice = (int) m.getref(i-1);
++	choice = (size_t) m.getref(i-1);
+ 
+ 	m.close();
+     }
+@@ -1539,7 +1539,7 @@
+ 	m.close();
+ 
+ 	if(r = i) {
+-	    st = (imstatus) ((int) m.getref(i-1));
++	    st = (imstatus) ((size_t) m.getref(i-1));
+ 	}
+     }
+ 
+@@ -2132,7 +2132,7 @@
+ 			    c = (icqcontact *) cm->getref(i);
+ 			}
+ 
+-			if((unsigned int) c > 100) {
++			if((unsigned long) c > 100) {
+ 			    string current = c->getdispnick();
+ 			    len = current.size();
+ 			    if(len > nick.size()) len = nick.size();
+Index: kkconsui-0.1/src/texteditor.cc
+===================================================================
+--- kkconsui-0.1/src/texteditor.cc
++++ kkconsui-0.1/src/texteditor.cc	2007-03-21 22:41:52.000000000 +0100
+@@ -1940,7 +1940,7 @@
+ }
+ 
+ int texteditor::findint(void *p1, void *p2) {
+-    return *(int *) p1 != (int) p2;
++    return *(size_t *) p1 != (size_t) p2;
+ }
+ 
+ int texteditor::findhighline(void *p1, void *p2) {
+Index: kkstrtext-0.1/kkstrtext.cc
+===================================================================
+--- kkstrtext-0.1/kkstrtext.cc
++++ kkstrtext-0.1/kkstrtext.cc	2007-03-21 22:42:27.000000000 +0100
+@@ -431,7 +431,7 @@
+ }
+ 
+ int intcompare(void *s1, void *s2) {
+-    return (int) s1 != (int) s2;
++    return (size_t) s1 != (size_t) s2;
+ }
+ 
+ string i2str(int i) {
+@@ -885,7 +885,7 @@
+ #ifdef HAVE_ICONV
+     iconv_t cd = iconv_open(tocs.c_str(), fromcs.c_str());
+ 
+-    if(((int) cd) != -1) {
++    if(((size_t) cd) != -1) {
+ 	string r, text(atext);
+ 	size_t inleft, outleft, soutleft;
+ 	char *inbuf, *outbuf, *sinbuf, *soutbuf;
