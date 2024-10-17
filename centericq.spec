@@ -10,7 +10,7 @@ License:	GPL
 Group:		Networking/Instant messaging
 Source:		http://konst.org.ua/download/%{name}-%{version}.tar.bz2
 Patch:      centericq-4.21.0-x86_64.diff
-URL:		http://konst.org.ua/centericq/
+URL:		https://konst.org.ua/centericq/
 Buildrequires:	ncurses-devel
 BuildRequires:	openssl-devel
 BuildRequires:	libstdc++-devel
